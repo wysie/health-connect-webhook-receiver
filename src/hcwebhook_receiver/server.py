@@ -25,10 +25,10 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
-DEFAULT_DATA_DIR = Path.home() / ".hermes" / "health_connect"
-DEFAULT_DB = DEFAULT_DATA_DIR / "health_connect.sqlite"
-DEFAULT_TOKEN_FILE = DEFAULT_DATA_DIR / "webhook_token"
-DEFAULT_LOG = Path.home() / ".hermes" / "logs" / "health_connect_receiver.log"
+DEFAULT_DATA_DIR = Path(os.environ.get("XDG_DATA_HOME", str(Path.home() / ".local" / "share"))) / "hcwebhook-receiver"
+DEFAULT_DB = Path(os.environ.get("HCWEBHOOK_DB", str(DEFAULT_DATA_DIR / "health_connect.sqlite"))).expanduser()
+DEFAULT_TOKEN_FILE = Path(os.environ.get("HCWEBHOOK_TOKEN_FILE", str(DEFAULT_DATA_DIR / "webhook_token"))).expanduser()
+DEFAULT_LOG = Path(os.environ.get("HCWEBHOOK_LOG", str(DEFAULT_DATA_DIR / "receiver.log"))).expanduser()
 
 
 def utc_now() -> str:
@@ -43,12 +43,12 @@ def log(msg: str) -> None:
 
 
 def load_token() -> str:
-    env = os.environ.get("HEALTH_CONNECT_WEBHOOK_TOKEN")
+    env = os.environ.get("HCWEBHOOK_TOKEN") or os.environ.get("HEALTH_CONNECT_WEBHOOK_TOKEN")
     if env:
         return env.strip()
     if DEFAULT_TOKEN_FILE.exists():
         return DEFAULT_TOKEN_FILE.read_text(encoding="utf-8").strip()
-    raise RuntimeError(f"Missing token: set HEALTH_CONNECT_WEBHOOK_TOKEN or create {DEFAULT_TOKEN_FILE}")
+    raise RuntimeError(f"Missing token: set HCWEBHOOK_TOKEN or create {DEFAULT_TOKEN_FILE}")
 
 
 def init_db(db_path: Path) -> None:
