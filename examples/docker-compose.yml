@@ -1,0 +1,18 @@
+services:
+  hcwebhook-receiver:
+    build: .
+    ports:
+      - "8787:8787"
+    environment:
+      HCWEBHOOK_DB: /data/health_connect.sqlite
+      HCWEBHOOK_TOKEN_FILE: /run/secrets/hcwebhook_token
+      HCWEBHOOK_MAX_BODY_MB: "50"
+    volumes:
+      - ./data:/data
+    secrets:
+      - hcwebhook_token
+    restart: unless-stopped
+
+secrets:
+  hcwebhook_token:
+    file: ./webhook_token

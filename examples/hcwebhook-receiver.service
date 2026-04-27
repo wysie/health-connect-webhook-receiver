@@ -1,0 +1,24 @@
+[Unit]
+Description=Health Connect Webhook Receiver
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=hcwebhook
+Group=hcwebhook
+Environment=HCWEBHOOK_HOST=0.0.0.0
+Environment=HCWEBHOOK_PORT=8787
+Environment=HCWEBHOOK_DB=/var/lib/hcwebhook-receiver/health_connect.sqlite
+Environment=HCWEBHOOK_TOKEN_FILE=/etc/hcwebhook-receiver/webhook_token
+ExecStart=/usr/local/bin/hcwebhook-receiver
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/hcwebhook-receiver
+
+[Install]
+WantedBy=multi-user.target

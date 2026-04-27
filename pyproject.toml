@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hcwebhook-receiver"
+version = "0.1.0"
+description = "Self-hosted SQLite receiver for Android Health Connect webhook exports"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Yuan Chin"}]
+keywords = ["health-connect", "samsung-health", "webhook", "sqlite", "wearables"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+]
+
+[project.urls]
+Homepage = "https://github.com/wysie/health-connect-webhook-receiver"
+Issues = "https://github.com/wysie/health-connect-webhook-receiver/issues"
+
+[project.scripts]
+hcwebhook-receiver = "hcwebhook_receiver.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

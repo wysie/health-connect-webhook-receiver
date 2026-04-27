@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+.env
+*.sqlite
+*.sqlite-*
+webhook_token
+.DS_Store

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.example.hcwebhook-receiver</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/hcwebhook-receiver</string>
+    <string>--host</string>
+    <string>0.0.0.0</string>
+    <string>--port</string>
+    <string>8787</string>
+  </array>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HCWEBHOOK_DB</key>
+    <string>/Users/YOUR_USER/.local/share/hcwebhook-receiver/health_connect.sqlite</string>
+    <key>HCWEBHOOK_TOKEN_FILE</key>
+    <string>/Users/YOUR_USER/.local/share/hcwebhook-receiver/webhook_token</string>
+  </dict>
+
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>WorkingDirectory</key>
+  <string>/Users/YOUR_USER</string>
+  <key>StandardOutPath</key>
+  <string>/Users/YOUR_USER/Library/Logs/hcwebhook-receiver.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/YOUR_USER/Library/Logs/hcwebhook-receiver.err.log</string>
+</dict>
+</plist>
