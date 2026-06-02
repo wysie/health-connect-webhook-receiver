@@ -1,5 +1,7 @@
 # Health Connect Webhook Receiver
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H1ZAPL)
+
 Self-hosted receiver for Android Health Connect webhook exports. Point an Android exporter such as HC Webhook / Health Connect to Webhook at this service and it stores:
 
 - raw JSON payloads in SQLite
